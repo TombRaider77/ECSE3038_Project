@@ -9,7 +9,6 @@ from datetime import datetime,timedelta
 import uvicorn
 import json
 import requests
-import pytz
 import re
 
 
@@ -112,7 +111,7 @@ async def get_parameter(request: Request):
     return output
 
 
-@app.put("/settings",status_code=200)
+@app.put("/settings")
 async def setting(request:Request):
     
     Pstate = await request.json()
@@ -124,7 +123,7 @@ async def setting(request:Request):
     else:
         mod_setting["user_light"] = Pstate["user_light"]
     
-    mod_setting["light_time_off"]= (datetime.strptime(mod_setting["user_light"],'%H:%M:%S')+Ttime(Pstate["light_duration"])).strftime("%H:%M:%S") #Convert to string ?
+    mod_setting["light_time_off"]= (datetime.strptime(mod_setting["user_light"],'%H:%M:%S')+parse_time(Pstate["light_duration"])).strftime("%H:%M:%S") #Convert to string ?
     
 
     if len(elements)==0:
