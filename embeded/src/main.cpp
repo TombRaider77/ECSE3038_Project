@@ -14,8 +14,8 @@
 OneWire oneWire(tempsens);	
 DallasTemperature sensors(&oneWire);
 
-//const char * = C;
-//cant generae a link sadge
+const char * endpoint = "https://davidoforthawin.onrender.com/";
+//who knows if this generated a link works atp
 
 void setup() {
 
